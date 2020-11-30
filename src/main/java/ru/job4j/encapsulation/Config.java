@@ -5,7 +5,7 @@ public class Config {
     private int position;
     private String[] properties;
 
-    public Config(String name, int position, String [] properties) {
+    public Config(String name, int position, String[] properties) {
         this.name = name;
         this.position = position;
         this.properties = properties;

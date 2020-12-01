@@ -1,35 +1,22 @@
 package ru.job4j.tracker;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class Item {
     private int id;
     private String name;
-    private LocalDateTime created;
 
-    public Item() {
+    public int getId() {
+        return id;
     }
 
-    public Item(String name) {
-        this.name = name;
-    }
-
-    public Item(int id, String name) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
-        this.created = LocalDateTime.now();
-    }
-
-    public static void main(String[] args) {
-        Item item = new Item();
-        Item itemName = new Item("Vasay");
-        Item itemIdName = new Item(45, "Petay");
-    }
-
-    public String getCreated() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm:ss");
-        String currentDateTimeFormat = created.format(formatter);
-        return currentDateTimeFormat;
     }
 }

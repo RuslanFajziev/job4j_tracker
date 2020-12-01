@@ -26,14 +26,10 @@ public class ShopDrop {
     }
 
     public static Product[] leftShift(Product[] products, int index) {
-        Product[] newArray = Arrays.copyOf(products, products.length);
-        for (int i = index; i < products.length; i++) {
-            if (i + 1 >= products.length) {
-                newArray[i] = null;
-            } else {
-                newArray[i] = products[i + 1];
-            }
+        for (int i = index; i < products.length - 1; i++) {
+            products[i] = products[i + 1];
         }
-        return newArray;
+        products[products.length - 1] = null;
+        return products;
     }
 }

@@ -11,7 +11,15 @@
 //        return item;
 //    }
 //
-//    public Item findId(int id) {
+//    public Item[] findAll() {
+//
+//    }
+//
+//    public Item[] findByName(String key) {
+//
+//    }
+//
+//    public Item findById(int id) {
 //        Item rsl = null;
 //        for (int index = 0; index < size; index++) {
 //            Item item = items[index];

@@ -15,15 +15,13 @@ public class Tracker {
 
     public Boolean delete(int id) {
         int index = indexOf(id);
-        boolean result = false;
-        if (index != -1 && size != 1) {
+        boolean result = index != -1;
+        if (result && size != 1) {
             System.arraycopy(items, index + 1, items, index, size - index);
             items[size - 1] = null;
-            result = true;
             size--;
         } else if (size == 1) {
             items[0] = null;
-            result = true;
             size--;
         }
         return result;
@@ -68,11 +66,10 @@ public class Tracker {
 
     public boolean replace(int id, Item itemRep) {
         int index = indexOf(id);
-        boolean result = false;
-        if (index != -1) {
+        boolean result = index != -1;
+        if (result) {
             itemRep.setId(id);
             items[index] = itemRep;
-            result = true;
         }
         return result;
     }

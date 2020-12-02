@@ -13,6 +13,22 @@ public class Tracker {
         return item;
     }
 
+    public Boolean delete(int id) {
+        int index = indexOf(id);
+        boolean result = false;
+        if (index != -1 && size != 1) {
+            System.arraycopy(items, index + 1, items, index, size - index);
+            items[size - 1] = null;
+            result = true;
+            size--;
+        } else if (size == 1) {
+            items[0] = null;
+            result = true;
+            size--;
+        }
+        return result;
+    }
+
     public Item[] findAll() {
         for (int index = 0; index < size; index++) {
             if (items[index] == null) {

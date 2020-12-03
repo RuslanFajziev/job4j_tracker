@@ -28,12 +28,6 @@ public class Tracker {
     }
 
     public Item[] findAll() {
-        for (int index = 0; index < size; index++) {
-            if (items[index] == null) {
-                size = index;
-                break;
-            }
-        }
         return Arrays.copyOf(items, size);
     }
 

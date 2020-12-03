@@ -16,12 +16,9 @@ public class Tracker {
     public Boolean delete(int id) {
         int index = indexOf(id);
         boolean result = index != -1;
-        if (result && size != 1) {
+        if (result) {
             System.arraycopy(items, index + 1, items, index, size - index);
             items[size - 1] = null;
-            size--;
-        } else if (size == 1) {
-            items[0] = null;
             size--;
         }
         return result;

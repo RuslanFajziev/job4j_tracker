@@ -42,7 +42,7 @@ public class StartUITest {
         String[] answers = {String.valueOf(idDel)};
         StartUI.deleteItem(new StubInput(answers), tracker);
         Item replaced = tracker.findById(idDel);
-        assertThat(String.valueOf(replaced), is("null"));
+        assertNull(replaced);
     }
 
 }

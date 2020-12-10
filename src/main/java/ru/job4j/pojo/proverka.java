@@ -22,5 +22,10 @@ public class proverka {
         System.out.println(Arrays.toString(numbersCopy));
         System.out.println(numbersCopy.length);
 
+        String str = "-------------------------" + System.lineSeparator() + "         Menu";
+        str += System.lineSeparator() + "-------------------------" + System.lineSeparator();
+        str += "0. Exit";
+        System.out.println(str);
+
     }
 }

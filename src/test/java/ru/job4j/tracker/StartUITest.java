@@ -74,4 +74,58 @@ public class StartUITest {
         str += "=== Exit Program ===" + System.lineSeparator() + "-------------------------" + System.lineSeparator();
         assertThat(out.toString(), is(str));
     }
+
+    @Test
+    public void whenShowAll() {
+        Output out = new StubOutput();
+        Input in = new StubInput(new String[] {"0", "1"});
+        Tracker tracker = new Tracker();
+        UserAction[] actions = {new ShowAll(out), new ExitProgram(out)};
+        new StartUI(out).init(in, tracker, actions);
+        String str = "-------------------------" + System.lineSeparator() + "         Menu" + System.lineSeparator();
+        str += "-------------------------" + System.lineSeparator() + "0. === Show all items ===" + System.lineSeparator();
+        str += "1. === Exit Program ===" + System.lineSeparator() + "-------------------------" + System.lineSeparator();
+        str += "=== Show all items ===" + System.lineSeparator() + "-------------------------" + System.lineSeparator();
+        str += "         Menu" + System.lineSeparator() + "-------------------------" + System.lineSeparator();
+        str += "0. === Show all items ===" + System.lineSeparator() + "1. === Exit Program ===" + System.lineSeparator();
+        str += "-------------------------" + System.lineSeparator() + "=== Exit Program ===" + System.lineSeparator();
+        str += "-------------------------" + System.lineSeparator();
+        assertThat(out.toString(), is(str));
+    }
+
+    @Test
+    public void whenFindItemName() {
+        Output out = new StubOutput();
+        Input in = new StubInput(new String[] {"0", "Name Find", "1"});
+        Tracker tracker = new Tracker();
+        UserAction[] actions = {new FindItemName(out), new ExitProgram(out)};
+        new StartUI(out).init(in, tracker, actions);
+        String str = "-------------------------" + System.lineSeparator() + "         Menu" + System.lineSeparator();
+        str += "-------------------------" + System.lineSeparator() + "0. === Find items by name ===" + System.lineSeparator();
+        str += "1. === Exit Program ===" + System.lineSeparator() + "-------------------------" + System.lineSeparator();
+        str += "=== Find items by name ===" + System.lineSeparator() + "== Find by name ERROR!!!!! ==" + System.lineSeparator();
+        str += "-------------------------" + System.lineSeparator() + "         Menu" + System.lineSeparator();
+        str += "-------------------------" + System.lineSeparator() + "0. === Find items by name ===" + System.lineSeparator();
+        str += "1. === Exit Program ===" + System.lineSeparator() + "-------------------------" + System.lineSeparator();
+        str += "=== Exit Program ===" + System.lineSeparator() + "-------------------------" + System.lineSeparator();
+        assertThat(out.toString(), is(str));
+    }
+
+    @Test
+    public void whenFindItemId() {
+        Output out = new StubOutput();
+        Input in = new StubInput(new String[] {"0", "1", "1"});
+        Tracker tracker = new Tracker();
+        UserAction[] actions = {new FindItemId(out), new ExitProgram(out)};
+        new StartUI(out).init(in, tracker, actions);
+        String str = "-------------------------" + System.lineSeparator() + "         Menu" + System.lineSeparator();
+        str += "-------------------------" + System.lineSeparator() + "0. === Find item by Id ===" + System.lineSeparator();
+        str += "1. === Exit Program ===" + System.lineSeparator() + "-------------------------" + System.lineSeparator();
+        str += "=== Find item by Id ===" + System.lineSeparator() + "== Find by Id ERROR!!!!! ==" + System.lineSeparator();
+        str += "-------------------------" + System.lineSeparator() + "         Menu" + System.lineSeparator();
+        str += "-------------------------" + System.lineSeparator() + "0. === Find item by Id ===" + System.lineSeparator();
+        str += "1. === Exit Program ===" + System.lineSeparator() + "-------------------------" + System.lineSeparator();
+        str += "=== Exit Program ===" + System.lineSeparator() + "-------------------------" + System.lineSeparator();
+        assertThat(out.toString(), is(str));
+    }
 }

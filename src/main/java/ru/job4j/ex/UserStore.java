@@ -46,5 +46,10 @@ public class UserStore {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+//        } catch (UserInvalidException ui) {
+//            ui.printStackTrace();
+//        } catch (UserNotFoundException un) {
+//            un.printStackTrace();
+//        }
     }
 }

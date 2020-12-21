@@ -1,18 +1,21 @@
 package ru.job4j.singleton;
 
 import ru.job4j.tracker.Item;
+import ru.job4j.tracker.Tracker;
 
 public class TrackerSingle4 {
-    private Item trSing;
+    private Tracker tracker;
 
     private TrackerSingle4() {
-        this.trSing = new Item();
-        trSing.setId(0);
-        trSing.setName("Name for id 0");
+        Item item = new Item();
+        Tracker track = new Tracker();
+        item.setName("Name Singleton");
+        track.add(item);
+        this.tracker = track;
     }
 
-    public String getName() {
-        return trSing.getName();
+    public Tracker getTracker() {
+        return tracker;
     }
 
     public static TrackerSingle4 getInstance() {
@@ -24,7 +27,6 @@ public class TrackerSingle4 {
     }
 
     public static void main(String[] args) {
-        TrackerSingle4 tracker = TrackerSingle4.getInstance();
-        System.out.println(tracker.getName());
+        Tracker tracker = TrackerSingle4.getInstance().getTracker();
     }
 }

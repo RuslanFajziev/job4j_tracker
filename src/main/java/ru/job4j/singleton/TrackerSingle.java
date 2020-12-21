@@ -1,24 +1,25 @@
 package ru.job4j.singleton;
 
 import ru.job4j.tracker.Item;
+import ru.job4j.tracker.Tracker;
 
 public enum TrackerSingle {
-    INSTANCE; /* здесь мы указываем перечисления. */
-    private Item trSing;
+    INSTANCE;
+    private Tracker tracker;
 
     private TrackerSingle() {
-        this.trSing = new Item();
-        trSing.setId(0);
-        trSing.setName("Name for id 0");
+        Item item = new Item();
+        Tracker track = new Tracker();
+        item.setName("Name Singleton");
+        track.add(item);
+        this.tracker = track;
+     }
+
+    public Tracker getTracker() {
+        return tracker;
     }
 
-    public String getName() {
-        return trSing.getName();
-    }
-
-    /* Конструкторы и методы. */
     public static void main(String[] args) {
-        TrackerSingle tracker = TrackerSingle.INSTANCE;
-        System.out.println(tracker.getName());
+        Tracker trackerS = TrackerSingle.INSTANCE.getTracker();
     }
 }

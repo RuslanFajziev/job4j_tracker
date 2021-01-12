@@ -15,12 +15,23 @@ public class Tracker {
 
     public Boolean delete(int id) {
         boolean result = false;
-        Item rstItem = findById(id);
-        if (rstItem != null) {
-            items.remove(rstItem);
+        int index = indexOf(id);
+        if (index != -1) {
+            items.remove(index);
             result = true;
         }
         return result;
+    }
+
+    public int indexOf(int id) {
+        int rsl = -1;
+        for (int index = 0; index < items.size(); index++) {
+            if (items.get(index).getId() == id) {
+                rsl = index;
+                break;
+            }
+        }
+        return  rsl;
     }
 
     public List<Item> findAll() {
@@ -50,17 +61,11 @@ public class Tracker {
 
     public boolean replace(int id, Item itemRep) {
         boolean result = false;
-        Item rstItem = findById(id);
-        if (rstItem != null) {
-            for (int index = 0; index < items.size(); index++) {
-                if (items.get(index).getId() == id) {
-                    items.remove(index);
-                    itemRep.setId(id);
-                    items.add(index, itemRep);
-                    result = true;
-                    break;
-                }
-            }
+        int index = indexOf(id);
+        if (index != -1) {
+            //items.remove(index);
+            items.set(index, itemRep);
+            result = true;
         }
         return result;
     }

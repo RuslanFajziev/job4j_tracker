@@ -18,6 +18,7 @@ public class EditItem implements UserAction {
         int id = input.askInt("Enter id: ");
         Item newItem = new Item();
         newItem.setName(name);
+        newItem.setId(id);
         if (tracker.replace(id, newItem)) {
             out.println("successful replacement");
         } else {

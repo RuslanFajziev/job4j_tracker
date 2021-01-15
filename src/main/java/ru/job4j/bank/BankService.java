@@ -15,23 +15,10 @@ public class BankService {
 
     public void addAccount(String passport, Account account) {
         User rslUsr = findByPassport(passport);
-        if (rslUsr != null) {
-            boolean rslAcc = findAccount(rslUsr, account);
-            if (!rslAcc) {
-                users.get(rslUsr).add(account);
-            }
+        boolean rslAcc = users.get(rslUsr).contains(account);
+        if (rslUsr != null && !rslAcc) {
+            users.get(rslUsr).add(account);
         }
-    }
-
-    public boolean findAccount(User rslF, Account accF) {
-        boolean rsl = false;
-        for (Account acc : users.get(rslF)) {
-            if (acc.equals(accF)) {
-                rsl = true;
-                break;
-            }
-        }
-        return rsl;
     }
 
     public User findByPassport(String passport) {
@@ -39,6 +26,7 @@ public class BankService {
         for (User keyUsr : users.keySet()) {
             if (keyUsr.getPassport().equals(passport)) {
                 rsl = keyUsr;
+                break;
             }
         }
         return rsl;
@@ -47,11 +35,8 @@ public class BankService {
     public Account findByRequisite(String passport, String requisite) {
         List<Account> accounts = new ArrayList<>();
         Account acc = null;
-        for (Map.Entry<User, List<Account>> entry : users.entrySet()) {
-            if (entry.getKey().getPassport().equals(passport)) {
-                accounts = entry.getValue();
-                break;
-            }
+        if (findByPassport(passport) != null) {
+            accounts = users.get(findByPassport(passport));
         }
         for (Account account : accounts) {
             if (account.getRequisite().equals(requisite)) {
@@ -66,12 +51,10 @@ public class BankService {
         boolean rsl = false;
         Account accSrc = findByRequisite(srcPassport, srcRequisite);
         Account accDst = findByRequisite(destPassport, destRequisite);
-        if (accSrc != null && accDst != null) {
-            if (accSrc.getBalance() >= amount) {
-                accSrc.setBalance(accSrc.getBalance() - amount);
-                accDst.setBalance(accDst.getBalance() + amount);
-                rsl = true;
-            }
+        if (accSrc != null && accDst != null && accSrc.getBalance() >= amount) {
+            accSrc.setBalance(accSrc.getBalance() - amount);
+            accDst.setBalance(accDst.getBalance() + amount);
+            rsl = true;
         }
         return rsl;
     }

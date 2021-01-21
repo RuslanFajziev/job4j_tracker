@@ -15,11 +15,7 @@ public class StringCompare implements Comparator<String> {
             rsl = diff;
         }
 
-        if (lnLeft >= lnRight) {
-            lnIndex = lnRight;
-        } else if (lnLeft < lnRight) {
-            lnIndex = lnLeft;
-        }
+        lnIndex = Math.min(lnLeft, lnRight);
 
         for (int index = 0; index < lnIndex; index++) {
             int rslTmp = Character.compare(left.charAt(index), right.charAt(index));

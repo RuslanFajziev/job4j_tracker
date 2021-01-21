@@ -16,8 +16,8 @@ public class Library {
             System.out.println(postulate.getName() + " - " + postulate.getQuantity());
         }
         System.out.println();
-        Book сleanСode = new Book("Clean code", 150);
-        books[3] = сleanСode;
+        Book clrCode = new Book("Clean code", 150);
+        books[3] = clrCode;
         for (int index = 0; index < books.length; index++) {
             Book postulate = books[index];
             System.out.println(postulate.getName() + " - " + postulate.getQuantity());

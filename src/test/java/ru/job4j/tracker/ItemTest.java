@@ -12,7 +12,7 @@ import static org.junit.Assert.assertThat;
 public class ItemTest {
 
     @Test
-    public void SortIncrease() {
+    public void sortIncrease() {
         Item itmF = new Item();
         itmF.setName("Fix bugs");
         itmF.setId(4);
@@ -29,7 +29,7 @@ public class ItemTest {
     }
 
     @Test
-    public void SortDecrease() {
+    public void sortDecrease() {
         Item itmF = new Item();
         itmF.setName("Fix bugs");
         itmF.setId(4);

@@ -1,7 +1,7 @@
 package ru.job4j.oop;
 
 public class Fix {
-    public Fix () {
+    public Fix() {
         System.out.println("Создали Fix!");
     }
 

@@ -33,7 +33,7 @@ public class User {
             return true;
         }
         if (o == null || getClass() != o.getClass()) {
-            return false ;
+            return false;
         }
         User user = (User) o;
         return Objects.equals(passport, user.passport);

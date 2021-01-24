@@ -2,6 +2,11 @@ package ru.job4j.bank;
 
 import java.util.Objects;
 
+/**
+ * Класс описывает клиента банка
+ * @author FaizievRT
+ * @version 1.0
+ */
 public class User {
     private String passport;
     private String username;
@@ -11,6 +16,10 @@ public class User {
         this.username = username;
     }
 
+    /**
+     *
+     * @return паспортные данные клиента(уникальны внутри системы)
+     */
     public String getPassport() {
         return passport;
     }

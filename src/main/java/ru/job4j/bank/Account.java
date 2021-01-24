@@ -2,6 +2,11 @@ package ru.job4j.bank;
 
 import java.util.Objects;
 
+/**
+ * Класс описывает банковский счёт
+ * @author FaizievRT
+ * @version 1.0
+ */
 public class Account {
     private String requisite;
     private double balance;
@@ -11,6 +16,10 @@ public class Account {
         this.balance = balance;
     }
 
+    /**
+     *
+     * @return реквизиты счета(уникальны внутри системы)
+     */
     public String getRequisite() {
         return requisite;
     }

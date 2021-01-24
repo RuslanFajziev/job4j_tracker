@@ -18,7 +18,6 @@ notifications:
       - rus23f@mail.ru
     on_success: never # default: change
     on_failure: always # default: always
-
 env:
   global:
     - CODECOV_TOKEN="15c319df-5575-4ef9-b7e4-d15db1acc47f"

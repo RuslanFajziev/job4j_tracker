@@ -16,4 +16,12 @@ public class Departments {
         }
         return new ArrayList<>(tmp);
     }
+
+    public static void sortAsc(List<String> orgs) {
+        Collections.sort(orgs);
+    }
+
+    public static void sortDesc(List<String> orgs) {
+        Collections.sort(orgs, new DepDescComp());
+    }
 }

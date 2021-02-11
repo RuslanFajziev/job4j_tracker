@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 
 public class SearchAtt {
@@ -13,10 +14,14 @@ public class SearchAtt {
     }
 
     public static List<Attachment> filterSize(List<Attachment> list) {
+        Predicate<Attachment> prdA = z -> {
+            return z.getSize() > 100;
+        };
+
         List<Attachment> lst = new ArrayList<Attachment>();
         UnaryOperator<List<Attachment>> cns = x -> {
             for (Attachment elm : x) {
-                if (elm.getSize() > 100) {
+                if (prdA.test(elm)) {
                     lst.add(elm);
                 }
             }
@@ -27,11 +32,15 @@ public class SearchAtt {
     }
 
     public static List<Attachment> filterName(List<Attachment> list) {
+        Predicate<Attachment> prdA2 = w -> {
+            return w.getName().contains("bug");
+        };
+
         List<Attachment> lst2 = new ArrayList<Attachment>();
         UnaryOperator<List<Attachment>> cns2 = y -> {
-            for (Attachment elm : y) {
-                if (elm.getName().contains("bug")) {
-                    lst2.add(elm);
+            for (Attachment elm2 : y) {
+                if (prdA2.test(elm2)) {
+                    lst2.add(elm2);
                 }
             }
             return lst2;

@@ -14,9 +14,7 @@ public class SearchAtt {
     }
 
     public static List<Attachment> filterSize(List<Attachment> list) {
-        Predicate<Attachment> prdA = z -> {
-            return z.getSize() > 100;
-        };
+        Predicate<Attachment> prdA = z -> z.getSize() > 100;
 
         List<Attachment> lst = new ArrayList<Attachment>();
         UnaryOperator<List<Attachment>> cns = x -> {

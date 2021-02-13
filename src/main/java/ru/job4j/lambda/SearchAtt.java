@@ -5,28 +5,22 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.function.UnaryOperator;
 
 public class SearchAtt {
-
-    public static List<Attachment> filter(List<Attachment> list, UnaryOperator<List<Attachment>> fun) {
-        return fun.apply(list);
+    public static boolean filter(Attachment att, Predicate<Attachment> fun) {
+        return fun.test(att);
     }
 
     public static List<Attachment> filterSize(List<Attachment> list) {
         Predicate<Attachment> prdA = z -> z.getSize() > 100;
 
-        List<Attachment> lst = new ArrayList<Attachment>();
-        UnaryOperator<List<Attachment>> cns = x -> {
-            for (Attachment elm : x) {
-                if (prdA.test(elm)) {
-                    lst.add(elm);
-                }
+        List<Attachment> rsl = new ArrayList<>();
+        for (Attachment att : list) {
+            if (filter(att, prdA)) {
+                rsl.add(att);
             }
-            return lst;
-        };
-//        return cns.apply(list);
-        return filter(list, cns);
+        }
+        return rsl;
     }
 
     public static List<Attachment> filterName(List<Attachment> list) {
@@ -34,17 +28,13 @@ public class SearchAtt {
             return w.getName().contains("bug");
         };
 
-        List<Attachment> lst2 = new ArrayList<Attachment>();
-        UnaryOperator<List<Attachment>> cns2 = y -> {
-            for (Attachment elm2 : y) {
-                if (prdA2.test(elm2)) {
-                    lst2.add(elm2);
-                }
+        List<Attachment> rsl = new ArrayList<>();
+        for (Attachment att : list) {
+            if (filter(att, prdA2)) {
+                rsl.add(att);
             }
-            return lst2;
-        };
-//        return cns2.apply(list);
-        return filter(list, cns2);
+        }
+        return rsl;
     }
 
     public static List<Attachment> sortSize(List<Attachment> list) {

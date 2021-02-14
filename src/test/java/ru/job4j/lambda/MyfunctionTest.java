@@ -24,8 +24,8 @@ public class MyfunctionTest {
 
     @Test
     public void whenLinearFunctionThenIndicativeResults() {
-        List<Double> result = Myfunction.diapason(5, 8, x -> Math.pow(x, 2));
-        List<Double> expected = Arrays.asList(25D, 36D, 49D);
+        List<Double> result = Myfunction.diapason(5, 8, x -> Math.pow(2, x));
+        List<Double> expected = Arrays.asList(32D, 64D, 128D);
         assertThat(result, is(expected));
     }
 }

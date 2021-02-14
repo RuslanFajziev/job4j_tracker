@@ -7,34 +7,26 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class SearchAtt {
-    public static boolean filter(Attachment att, Predicate<Attachment> fun) {
-        return fun.test(att);
-    }
-
-    public static List<Attachment> filterSize(List<Attachment> list) {
-        Predicate<Attachment> prdA = z -> z.getSize() > 100;
-
+    public static List<Attachment> filter(List<Attachment> list, Predicate<Attachment> fun) {
         List<Attachment> rsl = new ArrayList<>();
         for (Attachment att : list) {
-            if (filter(att, prdA)) {
+            if (fun.test(att)) {
                 rsl.add(att);
             }
         }
         return rsl;
+    }
+
+    public static List<Attachment> filterSize(List<Attachment> list) {
+        Predicate<Attachment> prdA = z -> z.getSize() > 100;
+        return filter(list, prdA);
     }
 
     public static List<Attachment> filterName(List<Attachment> list) {
         Predicate<Attachment> prdA2 = w -> {
             return w.getName().contains("bug");
         };
-
-        List<Attachment> rsl = new ArrayList<>();
-        for (Attachment att : list) {
-            if (filter(att, prdA2)) {
-                rsl.add(att);
-            }
-        }
-        return rsl;
+        return filter(list, prdA2);
     }
 
     public static List<Attachment> sortSize(List<Attachment> list) {

@@ -9,14 +9,14 @@ import static org.junit.Assert.assertThat;
 public class PhoneDictionaryTest {
     @Test
     public void whenFindByName() {
-        PhoneDictionary phones = new PhoneDictionary();
+        PhoneDictionary2 phones = new PhoneDictionary2();
         phones.add(
-                new Person("Petr", "Arsentev", "534872", "Bryansk")
+                new Person2("Petr", "Arsentev", "534872", "Bryansk")
         );
         phones.add(
-                new Person("Ruslan", "Faiziev", "555444", "Moscow")
+                new Person2("Ruslan", "Faiziev", "555444", "Moscow")
         );
-        ArrayList<Person> persons = phones.find("Faiziev");
+        ArrayList<Person2> persons = phones.find("Faiziev");
         assertThat(persons.get(0).getAddress(), is("Moscow"));
     }
 }

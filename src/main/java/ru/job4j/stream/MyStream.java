@@ -18,4 +18,5 @@ public class MyStream {
         List<Integer> arrIntPosit = arrInt.stream().filter(x -> x > 0).collect(Collectors.toList());
         arrIntPosit.forEach(System.out::println);
     }
+
 }

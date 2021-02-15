@@ -52,7 +52,7 @@ public class SchoolTest {
     @Test
     public void whenCollectClassC() {
         School sc = new School();
-        Predicate<Student> pr = x -> x.getScore() >= 0 && x.getScore() < 50;
+        Predicate<Student> pr = x -> x.getScore() > 0 && x.getScore() < 50;
         List<Student> rsl = sc.collect(students, pr);
         List<Student> expected = new ArrayList<>();
         expected.add(new Student(10, "Surname1"));

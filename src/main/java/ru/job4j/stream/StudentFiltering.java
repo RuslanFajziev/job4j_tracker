@@ -6,6 +6,9 @@ import java.util.stream.Collectors;
 
 public class StudentFiltering {
     public static Map<String, Student> filtering(List<Student> lstStudt) {
-        return lstStudt.stream().distinct().collect(Collectors.toMap(x -> x.getSurname(), x -> x));
+//        return lstStudt.stream().distinct().collect(Collectors.toMap(x -> x.getSurname(), x -> x));
+        return lstStudt.stream()
+                .collect(Collectors
+                        .toMap(x -> x.getSurname(), x -> x, (existing, replacement) -> existing));
     }
 }

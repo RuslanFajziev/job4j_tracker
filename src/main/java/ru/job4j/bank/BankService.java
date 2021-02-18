@@ -8,13 +8,14 @@ import java.util.Map;
 /**
  * Класс описывает банковский сервис
  * сервис хранит клиентские аккаунты {@link User}, каждый аккаунт может иметь один и более счетов {@link Account}
+ *
  * @author FaizievRT
  * @version 1.0
  */
 public class BankService {
     /**
-     *  Хранение клиентских аккаунтов осуществляется в коллекции типа HashMap
-     *  где ключь это {@link User}, а значение это список счетов(List) {@link Account}
+     * Хранение клиентских аккаунтов осуществляется в коллекции типа HashMap
+     * где ключь это {@link User}, а значение это список счетов(List) {@link Account}
      */
     final private Map<User, List<Account>> users = new HashMap<>();
 
@@ -27,9 +28,8 @@ public class BankService {
     }
 
     /**
-     *
      * @param passport паспортные данные клиента(уникальны внутри системы)
-     * @param account банковский счёт {@link Account} для клиента для {@link User}
+     * @param account  банковский счёт {@link Account} для клиента для {@link User}
      */
     public void addAccount(String passport, Account account) {
         User rslUsr = findByPassport(passport);
@@ -42,50 +42,39 @@ public class BankService {
     }
 
     /**
-     *
      * @param passport паспортные данные для поиска аккаунта
      * @return аккаунт клиента найденные по паспортным данным
      */
     public User findByPassport(String passport) {
-        User rsl = null;
-        for (User keyUsr : users.keySet()) {
-            if (keyUsr.getPassport().equals(passport)) {
-                rsl = keyUsr;
-                break;
-            }
-        }
-        return rsl;
+        return users.keySet()
+                .stream()
+                .filter(s -> s.getPassport().equals(passport))
+                .findFirst()
+                .orElse(null);
     }
 
     /**
-     *
-     * @param passport паспортные данные для поиска аккаунта
+     * @param passport  паспортные данные для поиска аккаунта
      * @param requisite реквизиты счета для поиска аккаунта
      * @return счет {@link Account} клиента {@link User}
      */
     public Account findByRequisite(String passport, String requisite) {
-        List<Account> accounts = new ArrayList<>();
-        Account acc = null;
-        User usr = findByPassport(passport);
-        if (usr != null) {
-            accounts = users.get(usr);
+        List<Account> accounts = users.get(findByPassport(passport));
+        if (accounts != null) {
+            return accounts.stream()
+                    .filter(s -> s.getRequisite().equals(requisite))
+                    .findFirst().
+                            orElse(null);
         }
-        for (Account account : accounts) {
-            if (account.getRequisite().equals(requisite)) {
-                acc = account;
-                break;
-            }
-        }
-        return acc;
+        return null;
     }
 
     /**
-     *
-     * @param srcPassport паспортные данные отправителя
-     * @param srcRequisite счет отправителя
-     * @param destPassport паспортные данные получателя
+     * @param srcPassport   паспортные данные отправителя
+     * @param srcRequisite  счет отправителя
+     * @param destPassport  паспортные данные получателя
      * @param destRequisite счет получателя
-     * @param amount сумма перевода
+     * @param amount        сумма перевода
      * @return true если удалось перевести деньги со счета на счет, false если денег недостаточно или ненайден счет отправителя/получателя
      */
     public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String destRequisite, double amount) {

@@ -7,7 +7,9 @@ import java.util.stream.Stream;
 
 public class MatrixFlatMap {
     public static List<Integer> flatMap(Integer[][] array) {
-        Stream<Integer[]> strArrInt = Stream.of(array);
-        return strArrInt.flatMap(Arrays::stream).sorted().distinct().collect(Collectors.toList());
+        return Stream.of(array).flatMap(Arrays::stream)
+                .sorted()
+                .distinct()
+                .collect(Collectors.toList());
     }
 }

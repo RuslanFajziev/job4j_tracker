@@ -1,9 +1,8 @@
 package ru.job4j.bank;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import ru.job4j.tracker.Output;
+
+import java.util.*;
 
 /**
  * Класс описывает банковский сервис
@@ -58,15 +57,10 @@ public class BankService {
      * @param requisite реквизиты счета для поиска аккаунта
      * @return счет {@link Account} клиента {@link User}
      */
-    public Account findByRequisite(String passport, String requisite) {
-        List<Account> accounts = users.get(findByPassport(passport));
-        if (accounts != null) {
-            return accounts.stream()
-                    .filter(s -> s.getRequisite().equals(requisite))
-                    .findFirst().
-                            orElse(null);
-        }
-        return null;
+    public Optional<Account> findByRequisite(String passport, String requisite) {
+        var accounts = users.get(findByPassport(passport));
+        return Optional.of(accounts.stream()
+                .filter(s -> s.getRequisite().equals(requisite)).findFirst()).get();
     }
 
     /**
@@ -79,8 +73,8 @@ public class BankService {
      */
     public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String destRequisite, double amount) {
         boolean rsl = false;
-        Account accSrc = findByRequisite(srcPassport, srcRequisite);
-        Account accDst = findByRequisite(destPassport, destRequisite);
+        Account accSrc = findByRequisite(srcPassport, srcRequisite).get();
+        Account accDst = findByRequisite(destPassport, destRequisite).get();
         if (accSrc != null && accDst != null && accSrc.getBalance() >= amount) {
             accSrc.setBalance(accSrc.getBalance() - amount);
             accDst.setBalance(accDst.getBalance() + amount);

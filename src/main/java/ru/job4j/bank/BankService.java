@@ -45,10 +45,15 @@ public class BankService {
      * @return аккаунт клиента найденные по паспортным данным
      */
     public Optional<User> findByPassport(String passport) {
-        return Optional.of(users.keySet()
-                .stream()
+        Optional<Optional<User>> tmp = Optional.of(users.keySet().stream()
+                .filter(Objects::nonNull)
                 .filter(s -> s.getPassport().equals(passport))
-                .findFirst().get());
+                .findFirst());
+        if (tmp.isPresent()) {
+            return tmp.get();
+        } else {
+            return Optional.empty();
+        }
     }
 
     /**
@@ -57,9 +62,12 @@ public class BankService {
      * @return счет {@link Account} клиента {@link User}
      */
     public Optional<Account> findByRequisite(String passport, String requisite) {
-        var accounts = users.get(findByPassport(passport).get());
-        return Optional.of(accounts.stream()
-                .filter(s -> s.getRequisite().equals(requisite)).findFirst()).get();
+        if (findByPassport(passport).isPresent()) {
+            var accounts = users.get(findByPassport(passport).get());
+            return Optional.of(accounts.stream()
+                    .filter(s -> s.getRequisite().equals(requisite)).findFirst()).get();
+        }
+        return Optional.empty();
     }
 
     /**

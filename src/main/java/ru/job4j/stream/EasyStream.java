@@ -5,24 +5,44 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class EasyStream {
-    static List<Integer> intInput;
+    private EasyElement easyElement;
+    private static EasyStream instance;
+
+    private EasyStream() {
+    }
+
+    public static EasyStream getInstance() {
+        if (instance == null) {
+            instance = new EasyStream();
+        }
+        return instance;
+    }
+
+    public EasyElement getEasyElement() {
+        return easyElement;
+    }
+
+    public void setEasyElement(EasyElement easyElement) {
+        this.easyElement = easyElement;
+    }
 
     public static EasyStream of(List<Integer> source) {
-//        throw new UnsupportedOperationException();
-        intInput.addAll(source);
-        return EasyStream;
+        EasyElement easyElement = new EasyElement();
+        easyElement.setIntInput(source);
+        getInstance().setEasyElement(easyElement);
+        return getInstance();
     }
 
     public EasyStream map(Function<Integer, Integer> fun) {
-//        throw new UnsupportedOperationException();
+        List<Integer> intInput = getInstance().getEasyElement().getIntInput();
         for (int index = 0; index < intInput.size(); index++) {
             intInput.set(index, fun.apply(intInput.get(index)));
         }
-        return EasyStream;
+        return getInstance();
     }
 
     public EasyStream filter(Predicate<Integer> fun) {
-//        throw new UnsupportedOperationException();
+        List<Integer> intInput = easyElement.getIntInput();
         for (int index = 0; index < intInput.size(); index++) {
             Integer intTmp = intInput.get(index);
             if (!fun.test(intTmp)) {
@@ -30,11 +50,10 @@ public class EasyStream {
                 index--;
             }
         }
-        return EasyStream;
+        return getInstance();
     }
 
     public List<Integer> collect() {
-//        throw new UnsupportedOperationException();
-        return intInput;
+        return easyElement.getIntInput();
     }
 }

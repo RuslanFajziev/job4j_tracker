@@ -1,48 +1,29 @@
 package ru.job4j.stream;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class EasyStream {
-    private EasyElement easyElement;
-    private static EasyStream instance;
+    final List<Integer> intInput = new ArrayList<>();
 
-    private EasyStream() {
-    }
-
-    public static EasyStream getInstance() {
-        if (instance == null) {
-            instance = new EasyStream();
-        }
-        return instance;
-    }
-
-    public EasyElement getEasyElement() {
-        return easyElement;
-    }
-
-    public void setEasyElement(EasyElement easyElement) {
-        this.easyElement = easyElement;
+    private EasyStream(List<Integer> intInput) {
+        this.intInput.addAll(intInput);
     }
 
     public static EasyStream of(List<Integer> source) {
-        EasyElement easyElement = new EasyElement();
-        easyElement.setIntInput(source);
-        getInstance().setEasyElement(easyElement);
-        return getInstance();
+        return new EasyStream(source);
     }
 
     public EasyStream map(Function<Integer, Integer> fun) {
-        List<Integer> intInput = getInstance().getEasyElement().getIntInput();
         for (int index = 0; index < intInput.size(); index++) {
             intInput.set(index, fun.apply(intInput.get(index)));
         }
-        return getInstance();
+        return new EasyStream(intInput);
     }
 
     public EasyStream filter(Predicate<Integer> fun) {
-        List<Integer> intInput = easyElement.getIntInput();
         for (int index = 0; index < intInput.size(); index++) {
             Integer intTmp = intInput.get(index);
             if (!fun.test(intTmp)) {
@@ -50,10 +31,10 @@ public class EasyStream {
                 index--;
             }
         }
-        return getInstance();
+        return new EasyStream(intInput);
     }
 
     public List<Integer> collect() {
-        return easyElement.getIntInput();
+        return intInput;
     }
 }

@@ -1,25 +1,25 @@
 package ru.job4j.singleton;
 
 import ru.job4j.tracker.Item;
-import ru.job4j.tracker.Tracker;
+import ru.job4j.tracker.MemTracker;
 
 public enum TrackerSingle {
     INSTANCE;
-    private Tracker tracker;
+    private MemTracker tracker;
 
     private TrackerSingle() {
         Item item = new Item();
-        Tracker track = new Tracker();
+        MemTracker track = new MemTracker();
         item.setName("Name Singleton");
         track.add(item);
         this.tracker = track;
      }
 
-    public Tracker getTracker() {
+    public MemTracker getTracker() {
         return tracker;
     }
 
     public static void main(String[] args) {
-        Tracker trackerS = TrackerSingle.INSTANCE.getTracker();
+        MemTracker trackerS = TrackerSingle.INSTANCE.getTracker();
     }
 }

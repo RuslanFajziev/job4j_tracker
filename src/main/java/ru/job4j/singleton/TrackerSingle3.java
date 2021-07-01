@@ -1,21 +1,21 @@
 package ru.job4j.singleton;
 
 import ru.job4j.tracker.Item;
-import ru.job4j.tracker.Tracker;
+import ru.job4j.tracker.MemTracker;
 
 public class TrackerSingle3 {
     private static final TrackerSingle3 INSTANCE = new TrackerSingle3();
-    private Tracker tracker;
+    private MemTracker tracker;
 
     private TrackerSingle3() {
         Item item = new Item();
-        Tracker track = new Tracker();
+        MemTracker track = new MemTracker();
         item.setName("Name Singleton");
         track.add(item);
         this.tracker = track;
     }
 
-    public Tracker getTracker() {
+    public MemTracker getTracker() {
         return tracker;
     }
 
@@ -24,6 +24,6 @@ public class TrackerSingle3 {
     }
 
     public static void main(String[] args) {
-        Tracker tracker = TrackerSingle3.getInstance().getTracker();
+        MemTracker tracker = TrackerSingle3.getInstance().getTracker();
     }
 }

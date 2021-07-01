@@ -3,3 +3,6 @@ create table if not exists items (
     name text,
     created timestamp
 );
+
+select * from items;
+SELECT * FROM pg_catalog.pg_tables;

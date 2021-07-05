@@ -10,6 +10,13 @@ public class Item {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     private LocalDateTime created = LocalDateTime.now();
 
+    public Item() {
+    }
+
+    public Item(String name) {
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }
@@ -52,7 +59,7 @@ public class Item {
             return false;
         }
         Item item = (Item) o;
-        return id == item.id && Objects.equals(name, item.name) && Objects.equals(created, item.created);
+        return id == item.id && Objects.equals(name, item.name) && Objects.equals(created.withNano(0), item.created.withNano(0));
     }
 
     @Override

@@ -78,9 +78,6 @@ public class SqlTrackerTest {
         tracker.add(item1);
         tracker.add(item2);
         tracker.add(item3);
-        assertThat(tracker.findById(item1.getId()).getName(), is("item1"));
-        tracker.replace(item3.getId(), itemNew);
-        assertThat(tracker.findById(item3.getId()).getName(), is("itemNew"));
         int idItem = item2.getId();
         assertTrue(tracker.delete(idItem));
         assertFalse(tracker.delete(idItem));
